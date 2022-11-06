@@ -24,12 +24,28 @@ ________________________________________________________________________________
 
 class Solution {
     public boolean isPalindrome(int x) {
-        int sum = 0,target = x;
+        int sum = 0,target = x;  // target to store the original value for future comparison reference
         while (x > 0) {
-            int temp = x % 10;
-            x /= 10;
-            sum = sum * 10 + temp;
+            int temp = x % 10; // getting the last digit
+            x /= 10; 
+            sum = sum * 10 + temp; 
         }
         return sum == target;
         }
 }
+
+dry run example 1 :
+
+while(121 > 0) [ true ]
+temp = 121 % 10 = 1
+x = x/10 = 121/10 = 12
+sum = 0 * 10 + 1 = 1
+while(12 > 0) [ true ]
+temp = 12 % 10 = 2
+x = x/10 = 12/10 = 1
+sum = 1 * 10 + 2 = 10 + 2 = 12
+while(1 > 0) [ true ]
+temp = 1%10 = 1
+x = x/10 = 1/10 = 0
+sum = 12 * 10 + 1 = 120 + 1 = 121
+while (0 > 0) [ terminate ] 
