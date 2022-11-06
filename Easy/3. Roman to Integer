@@ -46,7 +46,7 @@ ________________________________________________________________________________
 
 class Solution {
     public int romanToInt(String s) {
-        HashMap<Character,Integer> numerals = new HashMap<>();
+        HashMap<Character,Integer> numerals = new HashMap<>();  // map to match the roman numeral with it's value.
         numerals.put('I',1);
         numerals.put('V',5);
         numerals.put('X',10);
@@ -54,14 +54,26 @@ class Solution {
         numerals.put('C',100);
         numerals.put('D',500);
         numerals.put('M',1000);
-        int result = numerals.get(s.charAt(s.length()-1));
-        for(int i=s.length()-2; i>=0; i--){
-            if(numerals.get(s.charAt(i)) < numerals.get(s.charAt(i+1))){
-                result-=numerals.get(s.charAt(i));
+        int result = numerals.get(s.charAt(s.length()-1));  // store the numeric value of the last roman numeral from the string.
+        for(int i=s.length()-2; i>=0; i--){  // iterating from s.length()-2 because we have already stored the value for the last roman numeral in result.
+            if(numerals.get(s.charAt(i)) < numerals.get(s.charAt(i+1))){ // if the value of the curr numeral is less than the next numeral, 
+                result-=numerals.get(s.charAt(i)); // we subtract it from the result.
             } else {
-                result+=numerals.get(s.charAt(i));
+                result+=numerals.get(s.charAt(i)); // else we add it to the result.
             }
         }
         return result;
     }
 }
+
+dry run example 2 :
+ 
+result = numerals.get(s.charAt(4)) = numerals.get(I) = 1
+ i=3 -> numerals.get(s.charAt(3)) < numerals.get(s.charAt(4)) = numerals.get(I) < numerals.get(I) = 1 < 1 [ false ]
+        result = 1 + numerals.get(s.charAt(3)) = 1 + numerals.get(I) = 1 + 1 = 2
+ i=2 -> numerals.get(s.charAt(2)) < numerals.get(s.charAt(3)) = numerals.get(I) < numerals.get(I) = 1 < 1 [ false ]
+        result = 2 + numerals.get(s.charAt(2)) = 2 + 1 = 3
+ i=1 -> numerals.get(s.charAt(1)) < numerals.get(s.charAt(2)) = numerals.get(V) < numerals.get(I) = 5 < 1 [ false ] 
+        result = 3 + numerals.get(s.charAt(1)) = 3 + 5 = 8
+ i=0 -> numerals.get(s.charAt(0)) < numerals.get(s.charAt(1)) = numerals.get(L) < numerals.get(V) = 50 < 5 [ false ]
+        result = 8 + numerals.get(s.charAt(0)) = 8 + 50 = 58
